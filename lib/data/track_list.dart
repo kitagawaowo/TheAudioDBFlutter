@@ -19,6 +19,9 @@ class _TrackListState extends State<TrackList> {
   Future initialize() async {
     tracks = List.empty();
     tracks = await httpHelper?.getTracksByAlbumId(widget.album.id!);
+    setState(() {
+      tracks = tracks;
+    });
   }
   @override
   void initState(){
@@ -29,6 +32,31 @@ class _TrackListState extends State<TrackList> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: ListView.builder(
+        itemCount: tracks?.length,
+        itemBuilder: (context, index){
+          return TrackItem(track: tracks![index]);
+        }),
+    );
+  }
+}
+
+class TrackItem extends StatefulWidget {
+  const TrackItem({super.key, required this.track});
+  final Track track;
+
+  @override
+  State<TrackItem> createState() => _TrackItemState();
+}
+
+class _TrackItemState extends State<TrackItem> {
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: ListTile(
+        title: Text(widget.track.name!),
+      )
+    );
   }
 }
