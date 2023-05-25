@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../data/album.dart';
 import '../data/http_helper.dart';
+import '../data/track_list.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -31,7 +32,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('AppSuperZound'),
@@ -59,28 +59,35 @@ class _AlbumItemState extends State<AlbumItem> {
   @override
   Widget build(BuildContext context) {
     return Card(
-              child: ListTile(
-                title: Text(widget.album.name!),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(widget.album.artist!),
-                    Text(widget.album.yearReleased!),
-                  ],
-                ),
-                leading: Image(image: NetworkImage(widget.album.urlPoster!)),
-                trailing: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      isFavorite = !isFavorite;
-                    });
-                  },
-                  icon: Icon(
-                    Icons.favorite,
-                    color: isFavorite ? Colors.red : Colors.grey,
-                  ),
-                ),
-              ),
-            );
+      child: ListTile(
+          title: Text(widget.album.name!),
+          subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(widget.album.artist!),
+              Text(widget.album.yearReleased!),
+            ],
+          ),
+          leading: Image(image: NetworkImage(widget.album.urlPoster!)),
+          trailing: IconButton(
+            onPressed: () {
+              setState(() {
+                isFavorite = !isFavorite;
+              });
+            },
+            icon: Icon(
+              Icons.favorite,
+              color: isFavorite ? Colors.red : Colors.grey,
+            ),
+          ),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => TrackList(
+                          album: widget.album,
+                        )));
+          }),
+    );
   }
 }

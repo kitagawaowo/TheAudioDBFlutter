@@ -7,7 +7,7 @@ class Track {
 
   Track.fromJson(Map<String, dynamic> json){
     id = json['idTrack'];
-    name = json['strAlbum'];
+    name = json['strTrack'];
     duration = json['intDuration'];
   }
 }
