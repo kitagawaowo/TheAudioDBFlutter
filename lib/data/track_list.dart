@@ -33,11 +33,34 @@ class _TrackListState extends State<TrackList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
+      /*body: ListView.builder(
         itemCount: tracks?.length,
         itemBuilder: (context, index){
           return TrackItem(track: tracks![index]);
         }),
+        */
+        body: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              title: Text(widget.album.name!),
+              pinned: true,
+              snap: false,
+              floating: true,
+              //flexibleSpace: Image(image: NetworkImage(widget.album.urlPoster!)),
+              flexibleSpace: FlexibleSpaceBar(
+                title: Text(widget.album.artist!),
+                background: Image(image: NetworkImage(widget.album.urlPoster!)),
+              ),
+              expandedHeight: 200,
+            ),
+            SliverList.builder(
+              itemCount: tracks?.length,
+              itemBuilder: (context, index){
+                return TrackItem(track: tracks![index]);
+              }
+            )
+          ]
+        )
     );
   }
 }
@@ -56,6 +79,7 @@ class _TrackItemState extends State<TrackItem> {
     return Card(
       child: ListTile(
         title: Text(widget.track.name!),
+        subtitle: Text(widget.track.duration!),
       )
     );
   }

@@ -17,6 +17,8 @@ class HttpHelper {
       final List tracksMap = jsonResponse['track'];
       final List<Track> tracks = tracksMap.map((map) => Track.fromJson(map)).toList();
       return tracks;
+    } else {
+      return List.empty();
     }
   }
 
