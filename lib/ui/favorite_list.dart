@@ -28,6 +28,7 @@ class _FavoriteListState extends State<FavoriteList> {
 
   @override
   void initState() {
+    albums = List.empty();
     dbHelper = DbHelper();
     loadAlbums();
     super.initState();
