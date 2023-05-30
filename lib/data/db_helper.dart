@@ -35,4 +35,9 @@ class DbHelper {
         await db?.query(tableName, where: 'id=?', whereArgs: [album.id]);
     return maps!.isNotEmpty;
   }
+
+  Future<List<Album>>> fetchAll() async {
+    final maps = await db?.query(tableName);
+    List<Album> albums = maps!.map((e) => Album.fromMap(map)).toList();
+  }
 }
