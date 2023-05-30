@@ -7,6 +7,7 @@ class DbHelper {
   final int version = 1;
   final String databaseName = 'music.db';
   final String tableName = 'albums';
+
   Database? db;
 
   Future<Database> openDb() async {

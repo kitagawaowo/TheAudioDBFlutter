@@ -1,9 +1,9 @@
 class Album {
-  String? id;
-  String? name;
-  String? artist;
-  String? yearReleased;
-  String? urlPoster;
+  String id;
+  String name;
+  String artist;
+  String yearReleased;
+  String urlPoster;
 
   Album(
       {required this.id,
@@ -12,11 +12,21 @@ class Album {
       required this.yearReleased,
       required this.urlPoster});
 
-  Album.fromJson(Map<String, dynamic> json){
-    id = json['idAlbum'];
-    name = json['strAlbum'];
-    artist = json['strArtist'];
-    yearReleased = json['intYearReleased'];
-    urlPoster = json['strAlbumThumb'];
-  }   
+  Album.fromJson(Map<String, dynamic> json)
+      : this(
+            id: json['idAlbum'],
+            name: json['strAlbum'],
+            artist: json['strArtist'],
+            yearReleased: json['intYearReleased'],
+            urlPoster: json['strAlbumThumb']);
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'artist': artist,
+      'year': yearReleased,
+      'poster': urlPoster
+    };
+  }
 }
